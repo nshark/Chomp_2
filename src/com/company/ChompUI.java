@@ -94,6 +94,15 @@ public class ChompUI extends JFrame implements Runnable, ActionListener {
                     boardState[i] = x;
                 }
                 Point point = cp.AImove(boardState);
+                int x1 = point.x;
+                while(x1 <= 9){
+                    int y1 = point.y;
+                    while(y1 <= 9){
+                        chompBoard.board[x1][9-y1].isAlive = 0;
+                        y1++;
+                    }
+                    x1++;
+                }
             }
         }
     }
