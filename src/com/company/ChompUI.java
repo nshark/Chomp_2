@@ -94,6 +94,9 @@ public class ChompUI extends JFrame implements Runnable, ActionListener {
                     boardState[i] = x;
                 }
                 Point point = cp.AImove(boardState);
+                if (point == null || boardState[point.x] <= point.y){
+                    point = RandomChompPlayer.RandMove(boardState);
+                }
                 int x1 = point.x;
                 while(x1 <= 9){
                     int y1 = point.y;
