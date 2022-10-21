@@ -1,12 +1,10 @@
 package com.company;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class ChompPlayer {
-    HashMap<Integer, Point> states = new HashMap<>();
+    HashMap<Long, Point> states = new HashMap<>();
     ChompPlayer(){
         int[] c = new int[10];
         for (int i = 0; i < 10; i++) {
@@ -15,12 +13,12 @@ public class ChompPlayer {
         states.put(process(c), new Point(0,0));
     }
     public Point AImove(int[] boardState){
-        HashMap<Point, int[]> v =  possibleMoves(boardState);
-        for(Point p : v.keySet()){
-            if (!states.containsKey(process(v.get(p)))){
-                states.put(process(v.get(p)), AImove(v.get(p)));
+        HashMap<Point, int[]> possibleMove =  possibleMoves(boardState);
+        for(Point p : possibleMove.keySet()){
+            if (!states.containsKey(process(possibleMove.get(p)))){
+                states.put(process(possibleMove.get(p)), AImove(possibleMove.get(p)));
             }
-            if (states.get(process(v.get(p))) == null){
+            if (states.get(process(possibleMove.get(p))) == null){
                 return p;
             }
         }
@@ -51,10 +49,10 @@ public class ChompPlayer {
         }
         return list;
     }
-    private int process(int[] state){
-        int v = 0;
+    public long process(int[] state){
+        long v = 0;
         for (int i = 0; i < 10; i++) {
-            v += state[i] * Math.pow(10,i);
+            v += state[i] * Math.pow(11,i);
         }
         return v;
     }

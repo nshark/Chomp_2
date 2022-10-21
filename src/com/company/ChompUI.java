@@ -57,34 +57,30 @@ public class ChompUI extends JFrame implements Runnable, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        switch(e.getActionCommand()){
-            case("Quit"):{
+        switch (e.getActionCommand()) {
+            case ("Quit") -> {
                 dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
                 notQuit = false;
-                break;
             }
-            case("New Game"):{
-                for (Chip[] chips : chompBoard.board){
-                    for (Chip chip : chips){
+            case ("New Game") -> {
+                for (Chip[] chips : chompBoard.board) {
+                    for (Chip chip : chips) {
                         chip.isAlive = 1;
                     }
                 }
-                break;
             }
-            case("New 3x3 Game"):{
-                for (Chip[] chips : chompBoard.board){
-                    for (Chip chip : chips){
-                        if(chip.x < 101 && chip.y > 349){
-                            chip.isAlive=1;
-                        }
-                        else {
+            case ("New 3x3 Game") -> {
+                for (Chip[] chips : chompBoard.board) {
+                    for (Chip chip : chips) {
+                        if (chip.x < 101 && chip.y > 349) {
+                            chip.isAlive = 1;
+                        } else {
                             chip.isAlive = 0;
                         }
                     }
                 }
-                break;
             }
-            case("AI Move"):{
+            case ("AI Move") -> {
                 int[] boardState = new int[10];
                 for (int i = 0; i < 10; i++) {
                     int x = 0;
@@ -94,14 +90,34 @@ public class ChompUI extends JFrame implements Runnable, ActionListener {
                     boardState[i] = x;
                 }
                 Point point = cp.AImove(boardState);
-                if (point == null || boardState[point.x] <= point.y){
+                if (point == null || boardState[point.x] <= point.y) {
                     point = RandomChompPlayer.RandMove(boardState);
                 }
                 int x1 = point.x;
-                while(x1 <= 9){
+                while (x1 <= 9) {
                     int y1 = point.y;
-                    while(y1 <= 9){
-                        chompBoard.board[x1][9-y1].isAlive = 0;
+                    while (y1 <= 9) {
+                        chompBoard.board[x1][9 - y1].isAlive = 0;
+                        y1++;
+                    }
+                    x1++;
+                }
+            }
+            case ("Random Move") -> {
+                int[] boardState = new int[10];
+                for (int i = 0; i < 10; i++) {
+                    int x = 0;
+                    for (int j = 0; j < 10; j++) {
+                        x += chompBoard.board[i][j].isAlive;
+                    }
+                    boardState[i] = x;
+                }
+                Point point = RandomChompPlayer.RandMove(boardState);
+                int x1 = point.x;
+                while (x1 <= 9) {
+                    int y1 = point.y;
+                    while (y1 <= 9) {
+                        chompBoard.board[x1][9 - y1].isAlive = 0;
                         y1++;
                     }
                     x1++;
