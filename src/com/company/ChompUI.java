@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.util.Random;
 
 public class ChompUI extends JFrame implements Runnable, ActionListener {
     public Panel panel;
@@ -58,6 +59,26 @@ public class ChompUI extends JFrame implements Runnable, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
+            case ("New Random Game") -> {
+                for (Chip[] chips : chompBoard.board) {
+                    for (Chip chip : chips) {
+                        chip.isAlive = 1;
+                    }
+                }
+                int i = 10 - new Random().nextInt(9);
+                for (int j = 0; j < 10; j++) {
+                    for (int k = 0; k < 10; k++) {
+                        if (k > i-1) {
+                            chompBoard.board[j][9-k].isAlive = 0;
+                        }
+                        else{
+                            chompBoard.board[j][9-k].isAlive = 1;
+                        }
+                    }
+                    i -= new Random().nextInt(0,i+1);
+
+                }
+            }
             case ("Quit") -> {
                 dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
                 notQuit = false;
