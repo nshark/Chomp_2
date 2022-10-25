@@ -18,6 +18,10 @@ public class ChompBoard extends Canvas implements MouseListener {
     public void graphicsTick(){
         Graphics g = this.getBufferStrategy().getDrawGraphics();
         g.clearRect(0,0,500,500);
+       for (int i = 0; i < 500; i+=50) {
+            g.fillRect(i-2,0,4,500);
+            g.fillRect(0,i-2,500,4);
+        }
         for (Chip[] C : board){
             for (Chip c : C){
                 c.drawSelf(g);
