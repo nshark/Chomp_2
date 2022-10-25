@@ -16,10 +16,10 @@ public class RandomChompPlayer {
             }
         }
         if (boardState[0] == 0){
-            return new Point(random.nextInt(1,xstate), 0);
+            return new Point(random.nextInt(0,xstate), 0);
         }
         if (boardState[1] == 0){
-            return new Point(0, random.nextInt(1, boardState[0]));
+            return new Point(0, random.nextInt(0, boardState[0]));
         }
         int x = random.nextInt(0, xstate);
         int y = random.nextInt(0,boardState[x]);
